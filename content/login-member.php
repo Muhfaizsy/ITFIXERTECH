@@ -18,7 +18,6 @@ if (isset($_POST['simpan'])) {
 }
 ?>
 
-
 <div class="untree_co-section">
     <div class="container">
         <div class="block">
@@ -26,6 +25,7 @@ if (isset($_POST['simpan'])) {
                 <div class="col-md-8 col-lg-8 pb-4">
                     <?php if (isset($_SESSION['id_member'])) : ?>
                         Selamat Datang di Website ITFIXERTECH
+                        <p>Nama : </p>
                     <?php else : ?>
                         <form method="post">
                             <div class="col-12">

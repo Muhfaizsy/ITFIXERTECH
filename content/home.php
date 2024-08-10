@@ -106,25 +106,33 @@
         <div class="carousel-item active c-item">
             <img src="img/20240229_192742.jpg" class="d-block w-100 c-img" alt="Slide 1">
             <div class="carousel-caption top-0 mt-4">
-                <p class="mt-5 fs-3 text-uppercase">Discover the hidden world</p>
-                <h1 class="display-1 fw-bolder text-capitalize">The Aurora Tours</h1>
-                <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Book a tour</button>
+                <p class="mt-5 fs-3 text-uppercase">Selamat Datang</p>
+                <h1 class="display-1 fw-bolder text-capitalize">ITFIXERTECH</p></h1>
+                <a href="https://api.whatsapp.com/send/?phone=6285156473764&text=Saya+mau+booking+service+laptop+komputer&type=phone_number&app_absent=0">
+                    <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Segera Booking</button>
+                </a>
             </div>
         </div>
         <div class="carousel-item c-item">
             <img src="img/dsada.jpg" class="d-block w-100 c-img" alt="Slide 2">
             <div class="carousel-caption top-0 mt-4">
-                <p class="text-uppercase fs-3 mt-5">The season has arrived</p>
-                <p class="display-1 fw-bolder text-capitalize">3 available tours</p>
-                <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal" data-bs-target="#booking-modal">Book a tour</button>
+                <p class="text-uppercase fs-3 mt-5">Selamat Datang</p>
+                <p class="display-1 fw-bolder text-capitalize">ITFIXERTECH</p>
+                <a href="https://api.whatsapp.com/send/?phone=6285156473764&text=Saya+mau+booking+service+laptop+komputer&type=phone_number&app_absent=0">
+                    <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Segera Booking</button>
+                </a>
+
             </div>
         </div>
         <div class="carousel-item c-item">
             <img src="img/service-komputer.jpg" class="d-block w-100 c-img" alt="Slide 3">
             <div class="carousel-caption top-0 mt-4">
-                <p class="text-uppercase fs-3 mt-5">Destination activities</p>
-                <p class="display-1 fw-bolder text-capitalize">Go glacier hiking</p>
-                <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal" data-bs-target="#booking-modal">Book a tour</button>
+                <p class="text-uppercase fs-3 mt-5">Selamat Datang</p>
+                <p class="display-1 fw-bolder text-capitalize">ITFIXERTECH</p></p>
+                <a href="https://api.whatsapp.com/send/?phone=6285156473764&text=Saya+mau+booking+service+laptop+komputer&type=phone_number&app_absent=0">
+                    <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Segera Booking</button>
+                </a>
+
             </div>
         </div>
     </div>
@@ -147,7 +155,7 @@
         <img src="img/laptop.jpg" alt="Layanan Jasa Service Laptop">
         <h3>Layanan Jasa Service Laptop</h3>
         <p>My service melayani jasa service laptop semua merek dan type laptop panggilan untuk rumah dan kantor bisa dipanggil dan dikerjakan ditempat.</p>
-        <a href="?pg=jsl">
+        <a href="?pg=service-laptop">
             <button>Read More</button>
         </a>
     </div>
@@ -155,7 +163,7 @@
         <img src="img/service-komputer.jpg" alt="Layanan Jasa Service Komputer">
         <h3>Layanan Jasa Service Komputer</h3>
         <p>My service memberikan solusi terbaik dan mudah, layanan jasa service komputer panggilan ke rumah dan kantor ditangani tim teknisi professional dan handal.</p>
-        <a href="?pg=jsk">
+        <a href="?pg=service-komputer">
             <button>Read More</button>
         </a>
     </div>

@@ -28,7 +28,7 @@
 
     footer img {
         height: 100px;
-        width: 400px;
+        width: auto;
     }
 </style>
 
