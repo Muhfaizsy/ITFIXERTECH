@@ -1,8 +1,8 @@
 <?php
-// include 'admin/function/get_data.php';
+ob_start();
 
-$id_member = isset($_SESSION['id_member']) ? $_SESSION['id_member'] : '';
-$query = mysqli_query($koneksi, "SELECT * FROM `member`");
+$id_membership = isset($_SESSION['id_membership']) ? $_SESSION['id_membership'] : '';
+$query = mysqli_query($koneksi, "SELECT * FROM `membership`");
 $data = mysqli_fetch_assoc($query);
 
 if (!empty($_SESSION['cart'])) {
@@ -13,20 +13,17 @@ if (isset($_POST['simpan'])) {
     $email = htmlspecialchars($_POST['email']);
     $password = $_POST['password'];
 
-    $query = mysqli_query($koneksi, "SELECT *  FROM member WHERE member.email = '$email'");
+    $query = mysqli_query($koneksi, "SELECT *  FROM membership WHERE membership.email = '$email'");
     if (mysqli_num_rows($query) > 0) {
         $dataUser = mysqli_fetch_assoc($query);
         if ($dataUser['password'] == $password) {
-            $_SESSION['id_member'] = $dataUser['id'];
+            $_SESSION['id_membership'] = $dataUser['id'];
             $_SESSION['id_session'] = session_id();
 
             header('location: index.php');
         }
     }
 }
-// $member = getData($koneksi, $id_member);
-// print_r($data);
-// die;
 ?>
 <style>
     .background-nav {
@@ -255,7 +252,7 @@ if (isset($_POST['simpan'])) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <?php if (isset($_SESSION['id_member'])) : ?>
+                                <?php if (isset($_SESSION['id_membership'])) : ?>
                                     <p>Selamat Datang di Website ITFIXERTECH</p>
                                     <p>Nama : <?php echo htmlspecialchars($data['nama_lengkap']); ?></p>
                                     <p>Email : <?php echo htmlspecialchars($data['email']); ?></p>
@@ -279,15 +276,12 @@ if (isset($_POST['simpan'])) {
                         </div>
                     </div>
                 </div>
-
-
                 <!-- <li>
                     <label class="switch dark-mode">
                         <input type="checkbox" id="darkModeToggle">
                         <span class="slider round dark-mode"></span>
                     </label>
                 </li> -->
-
             </ul>
         </div>
     </div>

@@ -1,52 +1,76 @@
 <?php
+// Jika ada produk yang dihapus dari keranjang
 if (isset($_GET['delete-cart'])) {
     $id_produk = $_GET['delete-cart'];
     foreach ($_SESSION['cart'] as $key => $item) {
         if ($item['id_produk'] == $id_produk) {
             unset($_SESSION['cart'][$key]);
+            // Mengatur ulang array session setelah penghapusan
             $_SESSION['cart'] = array_values($_SESSION['cart']);
             header("location:?pg=cart");
+            exit(); // Menghentikan skrip setelah redirect
         }
     }
 } else {
 
-    // memeriksa barang ada atau tidak di dalam variable session
+    // Memeriksa apakah keranjang belanja sudah ada di session, jika belum, buat baru
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
 
-    if (!isset($_SESSION['id_member'])) {
+    // Memeriksa apakah pengguna sudah login sebagai member
+    if (!isset($_SESSION['id_membership'])) {
         header("location:?pg=member&message=Upss-Harus-Register-Dulu");
+        exit(); // Menghentikan skrip setelah redirect
     } else {
-        $id_member = $_SESSION['id_member'];
+        // Memastikan ID produk tersedia di POST
+        if (!isset($_POST['id_produk']) || empty($_POST['id_produk'])) {
+            die("ID produk tidak tersedia atau kosong.");
+        }
+
         $id_produk = $_POST['id_produk'];
-        $queryCart = mysqli_query($koneksi, "SELECT * FROM barang  WHERE id ='$id_produk'");
+
+        // Mengambil detail produk dari database
+        $queryCart = mysqli_query($koneksi, "SELECT * FROM barang WHERE id ='$id_produk'");
+
+        // Periksa apakah query berhasil
+        if (!$queryCart) {
+            die("Query gagal: " . mysqli_error($koneksi));
+        }
+
+        // Ambil data produk
         $rowBarang = mysqli_fetch_assoc($queryCart);
 
-        $session_produk = array(
-            'id_produk' => $id_produk,
-            'nama_produk' => $rowBarang['nama_barang'],
-            'qty'       => 1,
-            'harga'     => $rowBarang['harga'],
-            'foto'      => $rowBarang['foto']
-        );
+        // Jika produk ditemukan, tambahkan atau perbarui dalam keranjang
+        if ($rowBarang) {
+            $session_produk = array(
+                'id_produk' => $id_produk,
+                'nama_produk' => $rowBarang['nama_barang'],
+                'qty'       => 1,
+                'harga'     => $rowBarang['harga'],
+                'foto'      => $rowBarang['foto']
+            );
 
-        $product_exists = false;
-        // periksa apakah produk sudah ada di keranjang
-        foreach ($_SESSION['cart'] as $key =>  &$item) {
-            if ($item['$id_produk'] == $id_produk) {
-                // print_r($item['qty'] += 1);
-                // die;
-                $item['qty'] += 1;
-                $product_exists = true;
-                break;
+            $product_exists = false;
+            // Periksa apakah produk sudah ada di keranjang
+            foreach ($_SESSION['cart'] as $key => &$item) {
+                if ($item['id_produk'] == $id_produk) {
+                    // Jika produk sudah ada, tambahkan quantity-nya
+                    $item['qty'] += 1;
+                    $product_exists = true;
+                    break;
+                }
             }
-        }
 
-        // jika nilai sessionnya kosong / keranjang belanjanya produknya kosong
-        if (!$product_exists) {
-            $_SESSION['cart'][] = $session_produk;
+            // Jika produk belum ada di keranjang, tambahkan sebagai item baru
+            if (!$product_exists) {
+                $_SESSION['cart'][] = $session_produk;
+            }
+            header("location:index.php?tambah=cart-berhasil");
+            exit(); // Menghentikan skrip setelah redirect
+        } else {
+            // Jika produk tidak ditemukan, beri pesan error atau lakukan tindakan lain
+            echo "Produk tidak ditemukan.";
         }
-        header("location:index.php?tambah=cart-berhasil");
     }
 }

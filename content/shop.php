@@ -1,16 +1,13 @@
 <?php
 $queryProduk = mysqli_query($koneksi, "SELECT * FROM barang ORDER BY id DESC LIMIT 8");
 
-$id_member = isset($_SESSION['id_member']) ? $_SESSION['id_member'] : '';
-$query = mysqli_query($koneksi, "SELECT * FROM `member`");
+$id_membership = isset($_SESSION['id_membership']) ? $_SESSION['id_membership'] : '';
+$query = mysqli_query($koneksi, "SELECT * FROM `membership`");
 $data = mysqli_fetch_assoc($query);
 
 if (!empty($_SESSION['cart'])) {
     $cart_count = count($_SESSION['cart']);
 }
-// $member = getData($koneksi, $id_member);
-// print_r($data);
-// die;
 ?>
 
 <div align="right" class="mb-2">
@@ -24,16 +21,14 @@ if (!empty($_SESSION['cart'])) {
             <?php while ($rowProduk = mysqli_fetch_assoc($queryProduk)) : ?>
                 <div class="col mb-5">
                     <div class="card h-100">
-                        <input type="hidden" name="qty" value="<?= $rowProduk['qty'] ?>">
-                        <input type="hidden" name="id_produk" value="<?= $rowProduk['id'] ?>">
                         <!-- Product image-->
-                        <img src="admin/upload/<?= $rowProduk['foto'] ?>" class="img-fluid product-thumbnail">
+                        <img src="admin/upload/<?= htmlspecialchars($rowProduk['foto']) ?>" class="img-fluid product-thumbnail">
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">
-                                    <h3 class="product-title"><?= $rowProduk['nama_barang'] ?></h3>
+                                    <h3 class="product-title"><?= htmlspecialchars($rowProduk['nama_barang']) ?></h3>
                                 </h5>
                                 <!-- Product price-->
                                 <?= "Rp. " . number_format($rowProduk['harga']) ?>
@@ -41,7 +36,12 @@ if (!empty($_SESSION['cart'])) {
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="?pg=action-cart">Add to cart</a></div>
+                            <div class="text-center">
+                                <form action="?pg=action-cart" method="POST">
+                                    <input type="hidden" name="id_produk" value="<?= htmlspecialchars($rowProduk['id']) ?>">
+                                    <button type="submit" class="btn btn-outline-dark mt-auto">Add to cart</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

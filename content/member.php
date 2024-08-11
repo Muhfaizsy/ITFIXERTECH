@@ -7,10 +7,10 @@ if (isset($_POST['simpan'])) {
     $password     = $_POST['password'];
     $alamat       = $_POST['alamat'];
 
-    $insertMember = mysqli_query($koneksi, "INSERT INTO member (nama_lengkap, email, password, alamat)
+    $insertMembership = mysqli_query($koneksi, "INSERT INTO membership (nama_lengkap, email, password, alamat)
     VALUES('$nama_lengkap','$email','$password','$alamat')");
     if ($insertMember) {
-        $_SESSION['id_member'] = mysqli_insert_id($koneksi);
+        $_SESSION['id_membership'] = mysqli_insert_id($koneksi);
         $_SESSION['id_session'] = session_id();
         header("location:?pg=member&tambah=berhasil");
     }
